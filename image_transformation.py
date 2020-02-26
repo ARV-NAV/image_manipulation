@@ -36,15 +36,12 @@ def rotate_image(img_path: str, orientation: dict) -> ndarray:
         print("Key Error: unknown key {0}".format(err), file=stderr)
         dst = img
 
-    # Uncomment this for testing
-    # cv2.imshow('img', dst)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-
     return dst
 
 
 if __name__ == "__main__":
+    from cv2 import imshow, waitKey, destroyAllWindows
+
     test_data = {
         "pitch": 0,
         "yaw": 0,
@@ -52,3 +49,7 @@ if __name__ == "__main__":
     }
 
     new_img = rotate_image('./images/img_downscale_30.jpg', test_data)
+
+    imshow('img', new_img)
+    waitKey(0)
+    destroyAllWindows()
