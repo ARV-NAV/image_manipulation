@@ -1,24 +1,40 @@
-import cv2
-import numpy
+"""Provides Image Manipulation Module
+
+Functions provided in this module alter the input images
+to then pass to object detection algorithms
+"""
+# ================ Built-in Imports ================
 
 from sys import stderr
-from typing import Optional
-from inspect import currentframe, getframeinfo
+
+# ================ Third Party Imports ================
+
+from numpy import ndarray
+from cv2 import imread, getRotationMatrix2D, warpAffine
+
+# ================ Authorship ================
+
+__author__ = "Gregory Sanchez"
 
 
-def rotate_image(img_path: str, orientation: dict) -> Optional[numpy.ndarray]:
-    dst, frameinfo = None, None
-    img = cv2.imread(img_path, 0)
+def rotate_image(img_path: str, orientation: dict) -> ndarray:
+    """Rotate Image
+
+    @param: img_path (str): path to the image to rotate
+    @param: orientation (dict): orientation data of the vessel
+
+    @return: numpy array with the (un)altered image
+    """
+    img = imread(img_path, 0)
     rows, cols = img.shape
 
     try:
-        frameinfo = getframeinfo(currentframe())
-        roll = orientation["test"]
-
-        rot_matrix = cv2.getRotationMatrix2D((cols/2, rows/2), roll, 1)
-        dst = cv2.warpAffine(img, rot_matrix, (cols, rows))
+        roll = orientation["roll"]
+        rot_matrix = getRotationMatrix2D((cols/2, rows/2), roll, 1)
+        dst = warpAffine(img, rot_matrix, (cols, rows))
     except KeyError as err:
-        print("{0}:{1}: Key Error: unknown key {2}".format(frameinfo.filename, frameinfo.lineno, err), file=stderr)
+        print("Key Error: unknown key {0}".format(err), file=stderr)
+        dst = img
 
     # Uncomment this for testing
     # cv2.imshow('img', dst)
