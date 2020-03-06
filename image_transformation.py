@@ -139,6 +139,6 @@ if __name__ == "__main__":
 
     imwrite("saved_img.jpg", new_img)
 
-    # imshow('img', new_img)
-    # waitKey(0)
-    # destroyAllWindows()
+    imshow('img', new_img)
+    waitKey(0)
+    destroyAllWindows()
