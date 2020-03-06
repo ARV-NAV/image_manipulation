@@ -33,11 +33,11 @@ def get_transformation_matrix(orientation: dict, img_szie: Tuple[float, float]) 
 
     cx, cy = img_szie  # principal point that is usually at the image center
 
-    # focal_mm = 3.67  # This is specific for a Logitech c920 Camera (TODO: make sure this is correct)
-    # sensor_width_mm = 4.8  # This is specific for a Logitech c920 Camera
+    focal_mm = 3.67  # This is specific for a Logitech c920 Camera (TODO: make sure this is correct)
+    sensor_width_mm = 4.8  # This is specific for a Logitech c920 Camera
 
-    focal_mm = 26  # This is specific for a Samsung Galaxy S8 Rear Camera
-    sensor_width_mm = 7.06  # This is specific for a Samsung Galaxy S8 Rear Camera
+    # focal_mm = 26  # This is specific for a Samsung Galaxy S8 Rear Camera
+    # sensor_width_mm = 7.06  # This is specific for a Samsung Galaxy S8 Rear Camera
 
     f = (focal_mm / sensor_width_mm) * (cx * 2)  # focal length expressed in pixel units
 
@@ -134,7 +134,8 @@ if __name__ == "__main__":
     # }
 
     # The following image was captured with a Samsung Galaxy S8
-    new_img = rotate_image('./images/img_30_2.jpg', test_data)
+    # new_img = rotate_image('./images/img_30_2.jpg', test_data)
+    new_img = rotate_image('./logitech_camera/data/frame129.jpg', test_data)
 
     imwrite("saved_img.jpg", new_img)
 
